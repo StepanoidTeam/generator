@@ -46,6 +46,17 @@ function randomNumber(min, max) {
     return Math.random() * (max - min) + min;
 }
 
+function copyCanvasToClipboard(event) {
+    const selectedCanvas = event.target;
+
+    selectedCanvas.toBlob(function (blob) {
+        const item = new ClipboardItem({ "image/png": blob });
+        navigator.clipboard.write([item]);
+
+        console.log("copied 📋");
+    });
+}
+
 function generate() {
     // todo(vmyshko): use .classList.add
     startMenu.className = "hide";
@@ -60,6 +71,8 @@ function generate() {
         // todo(vmyshko): redundant variable, you can reuse canvasElement here
         var canvas = document.getElementById("canvas" + i);
         var ctx = canvas.getContext("2d");
+        // todo(vmyshko): use .addEventListener() to add click event
+        canvas.onclick = copyCanvasToClipboard;
 
         canvas.width = iconWidth.value;
         canvas.height = iconHeight.value;
