@@ -16,6 +16,21 @@ body {
     padding: 4px;
 }
 
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* todo(vmyshko): use instead .input-row */
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 #start-menu {
     margin: 50px auto 20px;
     padding: 0;

@@ -33,8 +33,7 @@ button:hover {
 .options-button {
     margin-bottom: 10px;
     margin-top: 5px;
-    width: 44%;
+    width: 43%;
+    margin-right: 10px;
 }
-.options-button:nth-child(3) {
-    margin-left: 10px;
-}
+
