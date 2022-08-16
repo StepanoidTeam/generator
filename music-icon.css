@@ -1,0 +1,117 @@
+
+/*////////////////////////////*/
+/*//////// music icon ////////*/
+/*////////////////////////////*/
+.audio-icon-wrapper {
+    text-align: right;
+    display: inline-block;
+    width: 15%;
+    background-color: black;
+}
+.audio-icon {
+    display: inline-block;
+    height: 25px;
+    width: 50px;
+    background-image:
+      linear-gradient(white,white),
+      linear-gradient(white,white),
+      linear-gradient(white,white),
+      linear-gradient(white,white),
+      linear-gradient(white,white),
+      linear-gradient(white,white),
+      linear-gradient(white,white);
+    
+    background-position: 
+      calc(50% - 18px) 50%,
+      calc(50% - 12px) 50%,
+      calc(50% - 6px) 50%,
+      50% 50%,
+      calc(50% + 6px) 50%,
+      calc(50% + 12px) 50%,
+      calc(50% + 18px) 50%;
+    
+    background-size: 
+      3px 6px,
+      3px 6px,
+      3px 6px,
+      3px 6px,
+      3px 6px,
+      3px 6px,
+      3px 6px;
+    background-repeat: no-repeat;
+    
+    animation: l-bars 1s linear infinite alternate;
+    }
+  
+  @keyframes l-bars {
+    0% {  
+      background-size: 
+        3px 25px,
+        3px 6px,
+        3px 6px,
+        3px 6px,
+        3px 6px,
+        3px 6px,
+        3px 6px;
+      }
+    16.6% {  
+      background-size: 
+        3px 6px,
+        5px 25px,
+        3px 6px,
+        3px 6px,
+        3px 6px,
+        3px 6px,
+        3px 6px;
+      }
+    33.2% {  
+      background-size: 
+        3px 6px,
+        3px 6px,
+        3px 25px,
+        3px 6px,
+        3px 6px,
+        3px 6px,
+        3px 6px;
+      }
+    49.8% {  
+      background-size: 
+        3px 6px,
+        3px 6px,
+        3px 6px,
+        3px 25px,
+        3px 6px,
+        3px 6px,
+        3px 6px;
+      }
+    66.4% {  
+      background-size: 
+        3px 6px,
+        3px 6px,
+        3px 6px,
+        3px 6px,
+        3px 25px,
+        3px 6px,
+        3px 6px;
+      }
+    83% {  
+      background-size: 
+        3px 6px,
+        3px 6px,
+        3px 6px,
+        3px 6px,
+        3px 6px,
+        3px 25px,
+        3px 6px;
+      }
+    100% {  
+      background-size: 
+        3px 6px,
+        3px 6px,
+        3px 6px,
+        3px 6px,
+        3px 6px,
+        3px 6px,
+        3px 25px;
+      }
+    }

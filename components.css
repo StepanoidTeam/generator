@@ -1,0 +1,40 @@
+/* common */
+
+input {
+    font-size: 40px;
+    padding: 6px;
+    border: 3px solid black;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    width: 100%;
+}
+input:focus, input:hover{
+    outline: none;
+    box-shadow: 0px 0px 0px 2px black;
+}
+
+button {
+    margin-top: 15px;
+    font-size: 40px;
+    padding: 10px;
+    border: 3px solid black;
+    box-shadow: 4px 4px 0 0 #000;
+    background-color: #efefef;
+}
+
+button:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
+
+/* custom */
+
+.options-button {
+    margin-bottom: 10px;
+    margin-top: 5px;
+    width: 44%;
+}
+.options-button:nth-child(3) {
+    margin-left: 10px;
+}

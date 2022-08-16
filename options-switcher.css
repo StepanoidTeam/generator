@@ -1,0 +1,34 @@
+/* todo(vmyshko): make it as styled checkbox instead of a button */
+.options-switcher {
+    margin: 5px 0 10px 0;
+    width: 90%;
+    padding: 0;
+    box-shadow: 0 0 0 0 #000;
+    /* background: repeating-linear-gradient(to top, black, black 2px, #ccc 2px, #ccc 6px); */
+    background-color: black;
+    border: 3px solid #ccc;
+    box-shadow: inset 0 0 0 8px #ccc;
+}
+
+.options-switcher:hover {
+    background-color: black;
+}
+
+.options-switcher span {
+    background-color: #efefef;
+    display: block;
+    padding: 10px;
+    width: 50%;
+    box-shadow: 0 0 0 3px #000,
+                4px 4px 0 3px #000;
+    transform: translateX(100%);
+}
+
+.options-switcher:hover span {
+    background-color: white;
+}
+
+.options-switcher.selected-switcher span {
+    transform: translateX(0);
+    background-color: white;
+}
