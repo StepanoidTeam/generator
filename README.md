@@ -1,1 +1,1 @@
-# generator
+# identicon generator
