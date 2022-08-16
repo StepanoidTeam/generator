@@ -11,22 +11,29 @@ var generateBtn = document.querySelector(".generate-button");
 var startMenu = document.querySelector("#start-menu");
 var galleryMenu = document.querySelector(".menu-header.gallery");
 var resultGallery = document.querySelector("#result-gallery");
-
-var firstGen = document.querySelector("#firstGen");
-var secondGen = document.querySelector("#secondGen");
 var clearBG = document.querySelector("#clearBG");
 
-// switcher: 1 or 2 Generator
-// todo(vmyshko): use .addEventListener
-firstGen.onclick = function () {
-    // todo(vmyshko): use .classList.add() //(update all usages)
-    firstGen.className = "options-button selected";
-    secondGen.className = "options-button";
-};
-secondGen.onclick = function () {
-    firstGen.className = "options-button";
-    secondGen.className = "options-button selected";
-};
+var optionGen1 = document.querySelector("#gen1");
+var optionGen2 = document.querySelector("#gen2");
+var optionGen3 = document.querySelector("#gen3");
+var optionGen4 = document.querySelector("#gen4");
+
+const gens = [optionGen1, optionGen2, optionGen3, optionGen4];
+
+// select 1st gen as default
+gens[0].classList.add("selected");
+
+// switcher: 1, 2... Generator
+gens.forEach(function (gen) {
+    // todo(vmyshko): use .addEventListener
+    gen.onclick = function () {
+        gens.forEach(function (gen2) {
+            gen2.classList.remove("selected");
+        });
+
+        gen.classList.add("selected");
+    };
+});
 
 // ON-OFF: clear BG button
 clearBG.onclick = function () {
@@ -96,7 +103,7 @@ function generate() {
         // todo(vmyshko): it would be better to lay on code variables rather than classnames from html
         // todo(vmyshko): create var for instance, genModeIndex or just genMode,
         // and put there mode name, or mode index, e.g. 1 or 2, 3...etc.
-        if (firstGen.className == "options-button selected") {
+        if (optionGen1.classList.contains("selected")) {
             //////////////////////////////////////////////////
             //////////////////////////////////////////////////
 
@@ -271,7 +278,7 @@ function generate() {
 
             //////////////////////////////////////////////////
             //////////////////////////////////////////////////
-        } else if (secondGen.className == "options-button selected") {
+        } else if (optionGen2.classList.contains("selected")) {
             //////////////////////////////////////////////////
             //////////////////////////////////////////////////
 
@@ -466,6 +473,58 @@ function generate() {
 
             //////////////////////////////////////////////////
             //////////////////////////////////////////////////
+        } else if (optionGen3.classList.contains("selected")) {
+            //new test
+
+            var pixelW = width * 0.1;
+            var pixelH = height * 0.1;
+            const shift = 5;
+
+            function drawMirrorPixels_mordy(x, y, fill = clearPixel) {
+                ctx.fillStyle = fill;
+
+                ctx.fillRect((shift + x) * pixelW - pixelW / 2, y * pixelH + pixelW / 2, pixelW, pixelH);
+                ctx.fillRect((shift - x) * pixelW - pixelW / 2, y * pixelH + pixelW / 2, pixelW, pixelH);
+            }
+
+            const [ww, hh] = [5, 9]; //mordy
+
+            for (let col = 0; col < ww; col++)
+                for (let row = 0; row < hh; row++) {
+                    const rnd = Math.random();
+                    const rndColor = rnd > 0.5 ? "white" : "black";
+                    // rnd > 0.5 ? (rnd > 0.75 ? "white" : "gray") : "black";
+                    // `rgba(0,0,0,${Math.random()})`;
+
+                    drawMirrorPixels_mordy(col, row, rndColor);
+                }
+        } else if (optionGen4.classList.contains("selected")) {
+            var pixelW = width * 0.1;
+            var pixelH = height * 0.1;
+            const shift = 5;
+
+            function drawMirrorPixels_svastik(x, y, fill = clearPixel) {
+                ctx.fillStyle = fill;
+
+                ctx.fillRect((shift + x) * pixelW - pixelW / 2, (shift + y) * pixelH - pixelH / 2, pixelW, pixelH);
+
+                ctx.fillRect((shift - x) * pixelW - pixelW / 2, (shift - y) * pixelH - pixelH / 2, pixelW, pixelH);
+
+                ctx.fillRect((shift - y) * pixelH - pixelH / 2, (shift + x) * pixelW - pixelW / 2, pixelW, pixelH);
+                ctx.fillRect((shift + y) * pixelH - pixelH / 2, (shift - x) * pixelW - pixelW / 2, pixelW, pixelH);
+            }
+
+            const [ww, hh] = [5, 5]; //svast
+
+            for (let col = 0; col < ww; col++)
+                for (let row = 0; row < hh; row++) {
+                    const rnd = Math.random();
+                    const rndColor = rnd > 0.5 ? "white" : "black";
+                    // rnd > 0.5 ? (rnd > 0.75 ? "white" : "gray") : "black";
+                    // `rgba(0,0,0,${Math.random()})`;
+
+                    drawMirrorPixels_svastik(col, row, rndColor);
+                }
         }
 
         ///////////////////////////////////
@@ -474,13 +533,6 @@ function generate() {
     }
 }
 
-// todo(vmyshko): better to use .addEventListener, but not critical
 generateBtn.onclick = function () {
-    if (
-        // todo(vmyshko): use .classList.contains('options-button selected')
-        firstGen.className == "options-button selected" ||
-        secondGen.className == "options-button selected"
-    ) {
-        generate();
-    }
+    generate();
 };
