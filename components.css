@@ -2,13 +2,25 @@
 
 input {
     font-size: 40px;
-    padding: 6px;
-    border: 3px solid black;
     width: 100%;
 }
 
-input:focus,
-input:hover {
+input,
+label,
+button {
+    cursor: pointer;
+}
+
+input[type="text"],
+input[type="number"] {
+    padding: 6px;
+    border: 3px solid black;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="text"]:hover,
+input[type="number"]:hover {
     outline: none;
     box-shadow: 0px 0px 0px 2px black;
 }
@@ -24,7 +36,6 @@ button {
 
 button:hover {
     background-color: white;
-    cursor: pointer;
 }
 
 /* custom */
