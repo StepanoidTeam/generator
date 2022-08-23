@@ -19,3 +19,11 @@
 .justify-center {
     justify-content: center;
 }
+
+.w100p {
+    width: 100%;
+}
+
+[hidden]{
+    display: none;
+}
