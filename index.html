@@ -1,53 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generator</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <audio autoplay loop src="audio/1.ogg"></audio>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Generator</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <audio autoplay loop src="audio/1.ogg"></audio>
 
-    <header class="menu-header gallery hide">
-        <span class="back-icon">Back</span><h1>Generator v1.0</h1><span class="audio-icon-wrapper"><span class="audio-icon"></span></span>
-    </header>
-
-    <div id="start-menu">
-        <header class="menu-header">
-            <span class="back-icon">Back</span><h1>Generator v1.0</h1><span class="audio-icon-wrapper"><span class="audio-icon"></span></span>
+        <header class="menu-header gallery hide">
+            <span class="back-icon">Back</span>
+            <h1>Generator v1.0</h1>
+            <span class="audio-icon-wrapper"><span class="audio-icon"></span></span>
         </header>
-        <hr>
-        <div class="input-container">
-            <div class="input-row">
-                <div class='input-label'>Width</div>
-                <input type="text" id='iconWidth' value='100'>
-            </div><div class="input-row">
-                <div class='input-label'>Height</div>
-                <input type="text" id='iconHeight' value ='100'>
-            </div>
-            <div class="input-row">
-                <div class='input-label'>Quantity</div>
-                <input type="text" id='quantity' value='1000'>
-            </div>
-            <div class="input-row">
-                <div class='input-label'>Version</div>
-                <div class="flex-row flex-wrap">
-                     <!-- todo(vmyshko): impl radio buttons instead or select -->
-                    <button class='options-button' id="gen1">1</button>
-                    <button class='options-button' id="gen2">2</button>
-                    <button class='options-button' id="gen3">3</button>
-                    <button class='options-button' id="gen4">4</button>
+
+        <div id="start-menu">
+            <header class="menu-header">
+                <span class="back-icon">Back</span>
+                <h1>Generator v1.0</h1>
+                <span class="audio-icon-wrapper"><span class="audio-icon"></span></span>
+            </header>
+            <hr />
+            <div class="input-container">
+                <div class="input-row">
+                    <div class="input-label">Width</div>
+                    <input type="text" id="iconWidth" value="100" />
                 </div>
-            </div><div class="input-row">
-                <div class='input-label'>BG</div>
-                <button class='options-switcher' id="clearBG"><span>OFF</span></button>
+                <div class="input-row">
+                    <div class="input-label">Height</div>
+                    <input type="text" id="iconHeight" value="100" />
+                </div>
+                <div class="input-row">
+                    <div class="input-label">Quantity</div>
+                    <input type="text" id="quantity" value="1000" />
+                </div>
+                <div class="input-row">
+                    <div class="input-label">Version</div>
+                    <div class="flex-row flex-wrap">
+                        <!-- todo(vmyshko): impl radio buttons instead or select -->
+                        <button class="options-button" id="gen1">1</button>
+                        <button class="options-button" id="gen2">2</button>
+                        <button class="options-button" id="gen3">3</button>
+                        <button class="options-button" id="gen4">4</button>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-label">BG</div>
+                    <button class="options-switcher" id="clearBG"><span>OFF</span></button>
+                </div>
+                <button class="generate-button">Generate</button>
             </div>
-            <button class='generate-button'>Generate</button>
         </div>
-    </div>
-    <div id="result-gallery"></div>
-    <script src="script.js"></script>
-</body>
+        <div id="result-gallery"></div>
+        <script src="script.js"></script>
+    </body>
 </html>
