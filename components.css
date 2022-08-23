@@ -11,6 +11,11 @@ button {
     cursor: pointer;
 }
 
+*:disabled{
+    cursor: not-allowed;
+}
+
+
 input[type="text"],
 input[type="number"] {
     padding: 6px;
@@ -36,6 +41,10 @@ button {
 
 button:hover {
     background-color: white;
+}
+
+button:active{
+    background-color: #efefef;
 }
 
 /* custom */
