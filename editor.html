@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Generator Editor</title>
+
+        <link rel="stylesheet" href="./editor.css" />
+        <script defer src="./editor.js"></script>
+    </head>
+    <body>
+        <header class="menu-header">
+            <a class="back-icon" href="./">Back</a>
+            <h1>Generator Editor v0.1</h1>
+            <span class="audio-icon-wrapper"><span class="audio-icon"></span></span>
+        </header>
+        <hr />
+
+        <div class="overlay">
+            <div class="editor-layout-grid">
+                <div class="form-inner form-outer settings">
+                    <div class="input-container">
+                        <div class="settings-col">
+                            <h1>Editor settings</h1>
+                            <div class="settings-row">
+                                <div class="flex-col w100p">
+                                    <div class="input-label">Width</div>
+                                    <input type="number" id="editorWidth" value="9" min="2" max="20" />
+                                </div>
+                                <div class="flex-col w100p" id="editorHeightBlock">
+                                    <div class="input-label">Height</div>
+                                    <input type="number" id="editorHeight" value="9" min="2" max="20" />
+                                </div>
+                                <div class="flex-col">
+                                    <span class="input-label">keep ratio</span>
+                                    <div class="flex-row justify-center">
+                                        <input class="options-switcher" type="checkbox" id="keepRatio" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="flex-col">
+                                <div class="input-label">palette</div>
+                                <div class="settings-row">
+                                    <label>
+                                        <span>black</span>
+                                        <input type="radio" name="color" />
+                                    </label>
+                                    <label>
+                                        <span>transparent</span>
+                                        <input type="radio" name="color" />
+                                    </label>
+                                </div>
+                            </div> -->
+
+                            <button>Generate</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="editor-matrix form-inner form-outer">empty</div>
+                <div class="results-container form-inner form-outer">empty</div>
+            </div>
+        </div>
+    </body>
+</html>
