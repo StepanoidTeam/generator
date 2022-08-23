@@ -1,34 +1,53 @@
 /* todo(vmyshko): make it as styled checkbox instead of a button */
+
 .options-switcher {
-    margin: 5px 0 10px 0;
-    width: 90%;
+    position: relative;
+    appearance: none;
+    width: 3.5em;
+    height: 1.5em;
+}
+
+.options-switcher:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: inherit;
+    height: inherit;
     padding: 0;
-    box-shadow: 0 0 0 0 #000;
-    /* background: repeating-linear-gradient(to top, black, black 2px, #ccc 2px, #ccc 6px); */
     background-color: black;
-    border: 3px solid #ccc;
     box-shadow: inset 0 0 0 8px #ccc;
+    box-sizing: border-box;
 }
 
-.options-switcher:hover {
-    background-color: black;
-}
+.options-switcher:after {
+    content: "off";
+    position: absolute;
 
-.options-switcher span {
-    background-color: #efefef;
-    display: block;
+    top: 0;
+    left: 0;
+    --handler-width: 1.5em;
+    width: var(--handler-width);
     padding: 10px;
-    width: 50%;
-    box-shadow: 0 0 0 3px #000,
-                4px 4px 0 3px #000;
-    transform: translateX(100%);
+
+    background-color: #efefef;
+    text-align: center;
+    box-shadow: 0 0 0 3px #000, 4px 4px 0 3px #000;
+
+    transition: left 100ms ease-in-out;
 }
 
-.options-switcher:hover span {
+.options-switcher:not(:checked) {
+    content: "off";
+}
+
+.options-switcher:checked:after {
+    content: "on";
     background-color: white;
+    left: calc(100% - var(--handler-width));
 }
 
-.options-switcher.selected-switcher span {
-    transform: translateX(0);
+.options-switcher:hover:after {
     background-color: white;
 }
