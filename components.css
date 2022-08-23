@@ -4,8 +4,6 @@ input {
     font-size: 40px;
     padding: 6px;
     border: 3px solid black;
-    margin-bottom: 10px;
-    margin-top: 5px;
     width: 100%;
 }
 
@@ -32,8 +30,9 @@ button:hover {
 /* custom */
 
 .options-button {
-    margin-bottom: 10px;
-    margin-top: 5px;
-    width: 43%;
-    margin-right: 10px;
+    width: 100%;
+    margin-top: 3px;
+    margin-right: 7px;
+    margin-bottom: 7px;
+    margin-left: 4px;
 }
