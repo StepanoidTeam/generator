@@ -10,6 +10,10 @@
         <script defer src="./editor.js"></script>
     </head>
     <body>
+        <template id="cellTemplate">
+            <button class="cell flex-row align-center justify-center"></button>
+        </template>
+
         <header class="menu-header">
             <a class="back-icon" href="./">Back</a>
             <h1>Generator Editor v0.1</h1>
@@ -26,11 +30,11 @@
                             <div class="settings-row">
                                 <div class="flex-col w100p">
                                     <div class="input-label">Width</div>
-                                    <input type="number" id="editorWidth" value="9" min="2" max="20" />
+                                    <input type="number" id="editorWidth" min="2" max="20" />
                                 </div>
                                 <div class="flex-col w100p" id="editorHeightBlock">
                                     <div class="input-label">Height</div>
-                                    <input type="number" id="editorHeight" value="9" min="2" max="20" />
+                                    <input type="number" id="editorHeight" min="2" max="20" />
                                 </div>
                                 <div class="flex-col">
                                     <span class="input-label">keep ratio</span>
@@ -54,12 +58,13 @@
                                 </div>
                             </div> -->
 
-                            <button>Generate</button>
+                            <button id="generateMatrixBtn">Generate matrix</button>
+                            <button id="generateSampleBtn">Generate sample</button>
                         </div>
                     </div>
                 </div>
                 <div class="editor-matrix form-inner form-outer">empty</div>
-                <div class="results-container form-inner form-outer">empty</div>
+                <div class="results-matrix form-inner form-outer">empty</div>
             </div>
         </div>
     </body>
