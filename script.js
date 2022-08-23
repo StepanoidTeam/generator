@@ -35,20 +35,6 @@ gens.forEach(function (gen) {
     };
 });
 
-// ON-OFF: clear BG button
-clearBG.onclick = function () {
-    // todo(vmyshko): use .classList.contains() //(update all usages)
-    if (clearBG.className == "options-switcher") {
-        clearBG.className = "options-switcher selected-switcher";
-        // todo(vmyshko): put those 'on' and 'off' to html. and just hide/show here
-        // or at least put span to html, and change text here using .textContent =''
-        clearBG.innerHTML = "<span>ON</span>";
-    } else {
-        clearBG.className = "options-switcher";
-        clearBG.innerHTML = "<span>OFF</span>";
-    }
-};
-
 function randomNumber(min, max) {
     return Math.random() * (max - min) + min;
 }
@@ -95,7 +81,7 @@ function generate() {
 
         // fill or not to fill... background
         var colorBG = "white";
-        if (clearBG.className == "options-switcher selected-switcher") {
+        if (clearBG.checked) {
             ctx.fillStyle = colorBG;
             ctx.fillRect(0, 0, width, height);
         }
@@ -474,8 +460,6 @@ function generate() {
             //////////////////////////////////////////////////
             //////////////////////////////////////////////////
         } else if (optionGen3.classList.contains("selected")) {
-            //new test
-
             var pixelW = width * 0.1;
             var pixelH = height * 0.1;
             const shift = 5;
@@ -483,8 +467,8 @@ function generate() {
             function drawMirrorPixels_mordy(x, y, fill = clearPixel) {
                 ctx.fillStyle = fill;
 
-                ctx.fillRect((shift + x) * pixelW - pixelW / 2, y * pixelH + pixelW / 2, pixelW, pixelH);
-                ctx.fillRect((shift - x) * pixelW - pixelW / 2, y * pixelH + pixelW / 2, pixelW, pixelH);
+                ctx.fillRect((shift + x) * pixelW - pixelW / 2, y * pixelH + pixelH / 2, pixelW, pixelH);
+                ctx.fillRect((shift - x) * pixelW - pixelW / 2, y * pixelH + pixelH / 2, pixelW, pixelH);
             }
 
             const [ww, hh] = [5, 9]; //mordy
@@ -507,7 +491,6 @@ function generate() {
                 ctx.fillStyle = fill;
 
                 ctx.fillRect((shift + x) * pixelW - pixelW / 2, (shift + y) * pixelH - pixelH / 2, pixelW, pixelH);
-
                 ctx.fillRect((shift - x) * pixelW - pixelW / 2, (shift - y) * pixelH - pixelH / 2, pixelW, pixelH);
 
                 ctx.fillRect((shift - y) * pixelH - pixelH / 2, (shift + x) * pixelW - pixelW / 2, pixelW, pixelH);
