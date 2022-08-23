@@ -14,15 +14,28 @@
     text-transform: uppercase;
 }
 
+.form-inner {
+    background: #ccc;
+    box-shadow:  inset 4px 4px white;
+    padding: 4px;
+}
+
+.form-outer{
+    border: 4px solid black;
+    box-shadow: 4px 4px 0 0 #000;
+}
+
+.form-inner.form-outer{
+    box-shadow: 4px 4px 0 0 #000, inset 4px 4px white;
+}
+
+
+
 #start-menu {
     margin: 50px auto 20px;
     padding: 0;
     text-align: center;
-    background: #ccc;
-    max-width: 480px;
-    min-width: 435px;
-    border: 4px solid black;
-    box-shadow: 5px 5px 0 0 #000;
+    width: 480px;
 }
 
 .menu-header {
@@ -31,7 +44,8 @@
     align-items: center;
 
     padding: 4px 0 4px 0;
-    background: #000;
+    background-color: #000;
+    color: white;
     border-top: 3px dotted #fff;
     border-bottom: 3px dotted #fff;
     line-height: 0;
@@ -60,7 +74,6 @@ h1 {
     width: 100%;
     font-weight: 400;
     font-size: 26px;
-    color: white;
     vertical-align: text-top;
 }
 
@@ -68,9 +81,8 @@ hr {
     border: 2px solid black;
 }
 
-#start-menu .input-container {
+.input-container {
     padding: 40px 70px 50px 70px;
-    box-shadow: inset 4.5px 4.5px 0 0 #fff;
 }
 
 canvas {
@@ -78,6 +90,7 @@ canvas {
     float: left;
     margin: 5px;
 }
+
 canvas:hover {
     cursor: pointer;
     box-shadow: 0 0 0 6px black;
@@ -102,6 +115,7 @@ canvas:hover {
     display: inline-flex;
     flex-direction: column;
     gap: 6px;
+    width: 100%;
 }
 
 .settings-row {

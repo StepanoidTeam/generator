@@ -16,29 +16,29 @@
             <span class="audio-icon-wrapper"><span class="audio-icon"></span></span>
         </header>
 
-        <div id="start-menu">
+        <div id="start-menu" class="form-outer">
             <header class="menu-header">
                 <span class="back-icon">Back</span>
                 <h1>Generator v1.0</h1>
                 <span class="audio-icon-wrapper"><span class="audio-icon"></span></span>
             </header>
             <hr />
-            <div class="input-container">
+            <div class="form-inner input-container">
                 <div class="settings-col">
                     <div class="settings-row">
-                        <div class="flex-col">
+                        <div class="flex-col w100p">
                             <div class="input-label">Width</div>
-                            <input type="text" id="iconWidth" value="100" />
+                            <input type="number" id="iconWidth" value="100" min="2" max="1000" />
                         </div>
-                        <div class="flex-col">
+                        <div class="flex-col w100p">
                             <div class="input-label">Height</div>
-                            <input type="text" id="iconHeight" value="100" />
+                            <input type="number" id="iconHeight" value="100" min="2" max="1000" />
                         </div>
                     </div>
                     <div class="settings-row">
-                        <div class="flex-col">
+                        <div class="flex-col w100p">
                             <div class="input-label">Quantity</div>
-                            <input type="text" id="quantity" value="1000" />
+                            <input type="number" id="quantity" value="1000" min="2" max="1000" />
                         </div>
                     </div>
 
