@@ -12,9 +12,7 @@
     text-transform: uppercase;
 }
 
-body {
-    padding: 4px;
-}
+
 
 .flex-col {
   display: flex;
@@ -67,7 +65,7 @@ body {
 
 .menu-header.gallery{
     box-shadow: 0 0 0 4px #000;
-    margin-bottom: 9px;
+    margin: 4px;
     position: sticky;
     top: 0;
 }
