@@ -34,7 +34,6 @@ body {
 #start-menu {
     margin: 50px auto 20px;
     padding: 0;
-    width: 80%;
     text-align: center;
     background: #ccc;
     max-width: 480px;
@@ -44,7 +43,10 @@ body {
 }
 
 .menu-header {
-    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
     padding: 4px 0 4px 0;
     background: #000;
     border-top: 3px dotted #fff;
@@ -54,8 +56,6 @@ body {
 }
 
 .back-icon {
-    display: inline-block;
-    width: 15%;
     font-weight: 400;
     font-size: 20px;
     color: white;
@@ -74,7 +74,7 @@ body {
 
 h1 {
     display: inline-block;
-    width: 70%;
+    width: 100%;
     font-weight: 400;
     font-size: 26px;
     color: white;
