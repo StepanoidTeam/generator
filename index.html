@@ -8,61 +8,65 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <!-- <audio autoplay loop src="audio/1.ogg"></audio> -->
+        <section id="settingsSection">
+            <div id="start-menu" class="form-outer">
+                <header class="menu-header">
+                    <a class="back-icon" href="./editor.html">Editor</a>
+                    <h1>Generator v1.0</h1>
+                    <span class="audio-icon-wrapper"><span class="audio-icon"></span></span>
+                </header>
+                <hr />
+                <div class="form-inner input-container">
+                    <div class="settings-col">
+                        <div class="settings-row">
+                            <div class="flex-col w100p">
+                                <div class="input-label">Width</div>
+                                <input type="number" id="iconWidth" value="100" min="2" max="1000" />
+                            </div>
+                            <div class="flex-col w100p">
+                                <div class="input-label">Height</div>
+                                <input type="number" id="iconHeight" value="100" min="2" max="1000" />
+                            </div>
+                        </div>
+                        <div class="settings-row">
+                            <div class="flex-col w100p">
+                                <div class="input-label">Quantity</div>
+                                <input type="number" id="quantity" value="1000" min="2" max="1000" />
+                            </div>
+                        </div>
 
-        <header class="menu-header gallery hide">
-            <span class="back-icon">Back</span>
-            <h1>Generator v1.0</h1>
-            <span class="audio-icon-wrapper"><span class="audio-icon"></span></span>
-        </header>
+                        <div class="flex-col">
+                            <div class="input-label">Version</div>
+                            <div class="settings-row">
+                                <!-- todo(vmyshko): impl radio buttons instead or select -->
+                                <button class="options-button" id="gen1">1</button>
+                                <button class="options-button" id="gen2">2</button>
+                                <button class="options-button" id="gen3">3</button>
+                                <button class="options-button" id="gen4">4</button>
+                            </div>
+                        </div>
+                        <div class="flex-col">
+                            <span class="input-label">BG</span>
+                            <div class="flex-row justify-center">
+                                <input class="options-switcher" type="checkbox" id="clearBG" />
+                            </div>
+                        </div>
+                        <button class="generate-button">Generate</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div id="start-menu" class="form-outer">
-            <header class="menu-header">
-                <span class="back-icon">Back</span>
+        <section id="gallerySection" hidden>
+            <header class="menu-header gallery border">
+                <span id="genBack" class="back-icon">Back</span>
                 <h1>Generator v1.0</h1>
                 <span class="audio-icon-wrapper"><span class="audio-icon"></span></span>
             </header>
-            <hr />
-            <div class="form-inner input-container">
-                <div class="settings-col">
-                    <div class="settings-row">
-                        <div class="flex-col w100p">
-                            <div class="input-label">Width</div>
-                            <input type="number" id="iconWidth" value="100" min="2" max="1000" />
-                        </div>
-                        <div class="flex-col w100p">
-                            <div class="input-label">Height</div>
-                            <input type="number" id="iconHeight" value="100" min="2" max="1000" />
-                        </div>
-                    </div>
-                    <div class="settings-row">
-                        <div class="flex-col w100p">
-                            <div class="input-label">Quantity</div>
-                            <input type="number" id="quantity" value="1000" min="2" max="1000" />
-                        </div>
-                    </div>
 
-                    <div class="flex-col">
-                        <div class="input-label">Version</div>
-                        <div class="settings-row">
-                            <!-- todo(vmyshko): impl radio buttons instead or select -->
-                            <button class="options-button" id="gen1">1</button>
-                            <button class="options-button" id="gen2">2</button>
-                            <button class="options-button" id="gen3">3</button>
-                            <button class="options-button" id="gen4">4</button>
-                        </div>
-                    </div>
-                    <div class="flex-col">
-                        <span class="input-label">BG</span>
-                        <div class="flex-row justify-center">
-                            <input class="options-switcher" type="checkbox" id="clearBG" />
-                        </div>
-                    </div>
-                    <button class="generate-button">Generate</button>
-                </div>
-            </div>
-        </div>
-        <div id="result-gallery"></div>
+            <div id="result-gallery"></div>
+        </section>
+
         <script src="script.js"></script>
     </body>
 </html>
