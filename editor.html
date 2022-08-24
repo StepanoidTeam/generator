@@ -14,57 +14,52 @@
             <button class="cell flex-row align-center justify-center"></button>
         </template>
 
-        <header class="menu-header">
+        <template id="paletteTemplate">
+            <input type="radio" name="palette" class="cell flex-row align-center justify-center"></button>
+        </template>
+
+        <header class="menu-header sticky border">
             <a class="back-icon" href="./">Back</a>
             <h1>Generator Editor v0.1</h1>
             <span class="audio-icon-wrapper"><span class="audio-icon"></span></span>
         </header>
-        <hr />
 
-        <div class="overlay">
-            <div class="editor-layout-grid">
-                <div class="form-inner form-outer settings">
-                    <div class="input-container">
-                        <div class="settings-col">
-                            <h1>Editor settings</h1>
-                            <div class="settings-row">
-                                <div class="flex-col w100p">
-                                    <div class="input-label">Width</div>
-                                    <input type="number" id="editorWidth" min="2" max="20" />
-                                </div>
-                                <div class="flex-col w100p" id="editorHeightBlock">
-                                    <div class="input-label">Height</div>
-                                    <input type="number" id="editorHeight" min="2" max="20" />
-                                </div>
-                                <div class="flex-col">
-                                    <span class="input-label">keep ratio</span>
-                                    <div class="flex-row justify-center">
-                                        <input class="options-switcher" type="checkbox" id="keepRatio" />
-                                    </div>
-                                </div>
+        <div class="flex-row" style="padding: 40px; gap: 40px">
+            <div class="flex-col" style="gap: 40px">
+                <div class="editor matrix form-inner form-outer">empty</div>
+                <div class="results matrix form-inner form-outer">empty</div>
+            </div>
+
+            <div class="form-inner form-outer settings">
+                <div class="settings-col">
+                    <h1>Editor settings</h1>
+                    <div class="settings-row">
+                        <div class="flex-col w100p">
+                            <div class="input-label">Width</div>
+                            <input type="number" id="editorWidth" min="2" max="20" />
+                        </div>
+                        <div class="flex-col w100p" id="editorHeightBlock">
+                            <div class="input-label">Height</div>
+                            <input type="number" id="editorHeight" min="2" max="20" />
+                        </div>
+                        <div class="flex-col">
+                            <span class="input-label">keep ratio</span>
+                            <div class="flex-row justify-center">
+                                <input class="options-switcher" type="checkbox" id="keepRatio" />
                             </div>
-
-                            <!-- <div class="flex-col">
-                                <div class="input-label">palette</div>
-                                <div class="settings-row">
-                                    <label>
-                                        <span>black</span>
-                                        <input type="radio" name="color" />
-                                    </label>
-                                    <label>
-                                        <span>transparent</span>
-                                        <input type="radio" name="color" />
-                                    </label>
-                                </div>
-                            </div> -->
-
-                            <button id="generateMatrixBtn">Generate matrix</button>
-                            <button id="generateSampleBtn">Generate sample</button>
                         </div>
                     </div>
+
+                    <div class="flex-row" style="gap: 40px">
+                        <button id="generateMatrixBtn">Generate matrix</button>
+                        <button id="generateSampleBtn">Generate sample</button>
+                    </div>
+
+                    <h1>Palette</h1>
+                    <div class="flex-col">
+                        <div class="palette border"></div>
+                    </div>
                 </div>
-                <div class="editor-matrix form-inner form-outer">empty</div>
-                <div class="results-matrix form-inner form-outer">empty</div>
             </div>
         </div>
     </body>
