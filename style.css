@@ -1,18 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap'); */
 
 @import url("./common.css");
 @import url('./components.css');
 @import url('./music-icon.css');
 @import url('./options-switcher.css');
 
+:root{
+    font-size: 24px; /* <- 1em equals to this value */
+}
+
+.big{
+    font-size: 40px;
+}
 
 *, ::before, ::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: VT323;
     text-transform: uppercase;
+
+    font-family: VT323;
+    /* font-family: 'Silkscreen', cursive; */
 }
+
 
 .form-inner {
     background: #ccc;
@@ -75,7 +86,7 @@
     padding-left: 6px;
 }
 
-.menu-header.gallery {
+.sticky {
     position: sticky;
     top: 0;
 }
@@ -116,14 +127,18 @@ canvas:hover {
 }
 
 .input-label {
-    font-size: 30px;
-    padding-bottom: 8px;
+    font-size: 0.75em;
+    padding-bottom: 0.2em;
 }
 
 .generate-button {
     width: 100%;
     padding-top: 15px;
     padding-bottom: 15px;
+}
+
+.settings{
+    padding: 40px;
 }
 
 .settings-col{
