@@ -10,7 +10,7 @@ var body = document.querySelector("body");
 var generateBtn = document.querySelector(".generate-button");
 var startMenu = document.querySelector("#start-menu");
 var galleryMenu = document.querySelector(".menu-header.gallery");
-var resultGallery = document.querySelector("#result-gallery");
+const resultGallery = document.querySelector("#result-gallery");
 var clearBG = document.querySelector("#clearBG");
 
 var optionGen1 = document.querySelector("#gen1");
@@ -19,6 +19,15 @@ var optionGen3 = document.querySelector("#gen3");
 var optionGen4 = document.querySelector("#gen4");
 
 const gens = [optionGen1, optionGen2, optionGen3, optionGen4];
+
+function toggleScreens(showGallery) {
+    settingsSection.hidden = showGallery;
+    gallerySection.hidden = !showGallery;
+}
+
+genBack.addEventListener("click", () => {
+    toggleScreens(false);
+});
 
 // select 1st gen as default
 gens[0].classList.add("selected");
@@ -51,18 +60,16 @@ function copyCanvasToClipboard(event) {
 }
 
 function generate() {
-    // todo(vmyshko): use .classList.add
-    startMenu.className = "hide";
-    galleryMenu.className = "menu-header gallery";
+    toggleScreens(true);
 
+    const canvasElements = [];
     for (i = 1; i <= quantity.value; i++) {
         var canvasElement = document.createElement("canvas");
 
         canvasElement.id = "canvas" + i;
-        body.appendChild(canvasElement);
+        canvasElements.push(canvasElement);
 
-        // todo(vmyshko): redundant variable, you can reuse canvasElement here
-        var canvas = document.getElementById("canvas" + i);
+        var canvas = canvasElement;
         var ctx = canvas.getContext("2d");
         // todo(vmyshko): use .addEventListener() to add click event
         canvas.onclick = copyCanvasToClipboard;
@@ -514,6 +521,8 @@ function generate() {
         // END
         ///////////////////////////////////
     }
+
+    resultGallery.replaceChildren(...canvasElements);
 }
 
 generateBtn.onclick = function () {
