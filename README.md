@@ -2,5 +2,9 @@
 
 version 0.2
 
-## Demo
+## Main Demo
 https://stepanoidteam.github.io/identicon-generator/
+
+## editor demo
+
+https://stepanoidteam.github.io/identicon-generator/editor
