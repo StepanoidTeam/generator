@@ -132,6 +132,4 @@ editorHeight.value = 5;
 generateMatrixBtn.click();
 generateSampleBtn.click();
 
-// todo(vmyshko): disable custom ratio for now
 keepRatio.click();
-keepRatio.disabled = true;
