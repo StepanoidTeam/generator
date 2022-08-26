@@ -4,6 +4,8 @@
 
 //--------------
 
+import { copyCanvasToClipboard } from "./copyCanvasToClipboard.js";
+
 // todo(vmyshko): use consts instead vars
 
 var body = document.querySelector("body");
@@ -48,22 +50,11 @@ function randomNumber(min, max) {
     return Math.random() * (max - min) + min;
 }
 
-function copyCanvasToClipboard(event) {
-    const selectedCanvas = event.target;
-
-    selectedCanvas.toBlob(function (blob) {
-        const item = new ClipboardItem({ "image/png": blob });
-        navigator.clipboard.write([item]);
-
-        console.log("copied 📋");
-    });
-}
-
 function generate() {
     toggleScreens(true);
 
     const canvasElements = [];
-    for (i = 1; i <= quantity.value; i++) {
+    for (let i = 1; i <= quantity.value; i++) {
         var canvasElement = document.createElement("canvas");
 
         canvasElement.id = "canvas" + i;
@@ -301,10 +292,6 @@ function generate() {
                     return false;
                 }
                 // return x;
-            }
-
-            function trueFalse() {
-                return Math.random() < 0.5;
             }
 
             // todo(vmyshko): move to global? or encapsulate inside fn for drawing pixels
