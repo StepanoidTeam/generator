@@ -5,7 +5,7 @@ function toggleRatio() {
 function paintCell(event) {
     const cell = event.target;
 
-    const selectedColorEl = document.querySelector(".palette>.cell:checked");
+    const selectedColorEl = document.querySelector(".palette-cell:checked");
 
     const value = +selectedColorEl.dataset.index;
 
@@ -31,8 +31,8 @@ function setCellIndex(cell, index) {
 }
 
 function getColsRows() {
-    const cols = editorWidth.value;
-    const rows = keepRatio.checked ? cols : editorHeight.value;
+    const cols = +editorWidth.value;
+    const rows = keepRatio.checked ? cols : +editorHeight.value;
 
     const size = cols * rows;
 
@@ -57,8 +57,59 @@ function generatePalette() {
     newCells[0].click();
 }
 
+// presets
+function notSet({ x, y, size, index }) {
+    return 0;
+}
+
+function noize({ x, y, cols }) {
+    return y * cols + x;
+}
+
+function vMirror({ x, y, cols, rows }) {
+    if (y < rows / 2) return y * cols + x;
+
+    return (rows - y - 1) * cols + x;
+}
+
+function hMirror({ x, y, cols, rows }) {
+    if (x < cols / 2) return y * cols + x;
+
+    return (y + 1) * cols - x - 1;
+}
+
+const presets = [
+    //
+    vMirror,
+    hMirror,
+
+    notSet,
+    noize,
+];
+
+function initPresets() {
+    const presetEls = presets.map((preset) => {
+        const presetEl = presetTemplate.content.cloneNode(true).firstElementChild;
+
+        presetEl.dataset.label = preset.name;
+        presetEl.value = preset.name;
+
+        return presetEl;
+    });
+
+    const presetsContainer = document.querySelector(".presets");
+
+    presetsContainer.replaceChildren(...presetEls);
+
+    document.querySelector("[name=preset]:first-child").checked = true;
+}
+
 function generateMatrix() {
     const { cols, rows, size } = getColsRows();
+
+    const selectedPresetName = document.querySelector("[name=preset]:checked").value;
+
+    const currentPresetFn = presets.find((p) => p.name === selectedPresetName);
 
     const editorGrid = document.querySelector(".editor");
 
@@ -66,7 +117,10 @@ function generateMatrix() {
     for (let index = 0; index < size; index++) {
         const cell = cellTemplate.content.cloneNode(true).firstElementChild;
 
-        setCellIndex(cell, 0);
+        const y = (index - (index % cols)) / cols;
+        const x = index - y * cols;
+
+        setCellIndex(cell, currentPresetFn({ x, y, size, cols, rows, index }));
 
         cell.addEventListener("click", paintCell);
         newCells.push(cell);
@@ -115,6 +169,8 @@ function generateSample() {
     resultsGrid.style.setProperty("--rows", rows);
 }
 
+initPresets();
+
 // add listeners
 keepRatio.addEventListener("change", toggleRatio);
 generateMatrixBtn.addEventListener("click", () => {
@@ -124,8 +180,8 @@ generateMatrixBtn.addEventListener("click", () => {
 generateSampleBtn.addEventListener("click", generateSample);
 
 //defaults
-editorWidth.value = 5;
-editorHeight.value = 5;
+editorWidth.value = 6;
+editorHeight.value = 6;
 
 //def
 

@@ -15,12 +15,16 @@
         </template>
 
         <template id="paletteTemplate">
-            <input type="radio" name="palette" class="cell flex-row align-center justify-center"></button>
+            <input type="radio" name="palette" class="palette-cell flex-row align-center justify-center" />
+        </template>
+
+        <template id="presetTemplate">
+            <input type="radio" name="preset" class="flex-row align-center justify-center" />
         </template>
 
         <header class="menu-header sticky border">
             <a class="back-icon" href="./">Back</a>
-            <h1>Generator Editor v0.3</h1>
+            <h1>Generator Editor v0.4</h1>
             <span class="audio-icon-wrapper"><span class="audio-icon"></span></span>
         </header>
 
@@ -49,6 +53,9 @@
                             </div>
                         </div>
                     </div>
+
+                    <h1>Presets</h1>
+                    <div class="presets flex-row" style="gap: 4px"></div>
 
                     <div class="flex-row" style="gap: 40px">
                         <button id="generateMatrixBtn">Generate matrix</button>
