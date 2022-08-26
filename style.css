@@ -25,23 +25,6 @@
 }
 
 
-.form-inner {
-    background: #ccc;
-    box-shadow:  inset 4px 4px white;
-    padding: 4px;
-}
-
-.form-outer{
-    border: 4px solid black;
-    box-shadow: 4px 4px 0 0 #000;
-}
-
-.form-inner.form-outer{
-    box-shadow: 4px 4px 0 0 #000, inset 4px 4px white;
-}
-
-
-
 #start-menu {
     margin: 50px auto 20px;
     padding: 0;
@@ -115,6 +98,8 @@ canvas {
     display: block;
     float: left;
     margin: 5px;
+
+    image-rendering: pixelated;
 }
 
 canvas:hover {
@@ -144,13 +129,13 @@ canvas:hover {
 .settings-col{
     display: inline-flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 10px;
     width: 100%;
 }
 
 .settings-row {
     display: inline-flex;
-    gap: 12px;
+    gap: 20px;
 }
 
 .selected {
