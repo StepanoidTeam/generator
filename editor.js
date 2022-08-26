@@ -67,21 +67,21 @@ function noize({ x, y, cols }) {
 }
 
 function vMirror({ x, y, cols, rows }) {
-    if (y < rows / 2) return y * cols + x;
+    if (y < rows / 2) return y * cols + x; // first half
 
     return (rows - y - 1) * cols + x;
 }
 
 function hMirror({ x, y, cols, rows }) {
-    if (x < cols / 2) return y * cols + x;
+    if (x < cols / 2) return y * cols + x; // first half
 
     return (y + 1) * cols - x - 1;
 }
 
 const presets = [
     //
-    vMirror,
     hMirror,
+    vMirror,
 
     notSet,
     noize,
@@ -131,39 +131,60 @@ function generateMatrix() {
     editorGrid.style.setProperty("--rows", rows);
 }
 
+function generatePic(indices) {
+    const { cols, rows, size } = getColsRows();
+
+    const canvas = canvasTemplate.content.cloneNode(true).firstElementChild;
+    const ctx = canvas.getContext("2d");
+
+    const scale = 30;
+
+    canvas.width = cols * scale;
+    canvas.height = rows * scale;
+
+    ctx.scale(scale, scale);
+
+    const genColors = new Map();
+
+    for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+            const index = y * cols + x;
+
+            // gen random color for specific index
+            if (!genColors.has(indices[index])) {
+                const rnd = Math.random();
+
+                const rndColor = rnd > 0.5 ? "white" : "black";
+                // const rndColor = `rgba(0,0,0,${rnd})`;
+
+                // todo(vmyshko): droch
+                genColors.set(indices[index], rndColor);
+            }
+
+            // reuse pre-gen color
+            ctx.fillStyle = genColors.get(indices[index]);
+            ctx.fillRect(x, y, 1, 1);
+        }
+    }
+
+    return canvas;
+}
+
 function generateSample() {
     const { cols, rows, size } = getColsRows();
 
     const editorGrid = document.querySelector(".editor");
     const resultsGrid = document.querySelector(".results");
 
-    const newCells = [];
-
-    const genColors = new Map();
-
-    [...editorGrid.children].forEach((refCell) => {
-        const cell = cellTemplate.content.cloneNode(true).firstElementChild;
-
+    const indices = [...editorGrid.children].map((refCell) => {
         const { index } = refCell.dataset;
 
-        // gen random color for specific index
-        if (!genColors.has(index)) {
-            const rnd = Math.random();
-
-            const rndColor = rnd > 0.5 ? "white" : "black";
-
-            // const rndColor = `rgba(0,0,0,${rnd})`;
-
-            genColors.set(index, rndColor);
-        }
-
-        // reuse pre-gen color
-        cell.style.backgroundColor = genColors.get(index);
-
-        newCells.push(cell);
+        return +index;
     });
 
-    resultsGrid.replaceChildren(...newCells);
+    const sample = generatePic(indices);
+
+    resultsGrid.replaceChildren(sample);
 
     resultsGrid.style.setProperty("--cols", cols);
     resultsGrid.style.setProperty("--rows", rows);
@@ -177,6 +198,7 @@ generateMatrixBtn.addEventListener("click", () => {
     generateMatrix();
     generatePalette();
 });
+// generateSampleBtn.addEventListener("click", generateSample);
 generateSampleBtn.addEventListener("click", generateSample);
 
 //defaults
