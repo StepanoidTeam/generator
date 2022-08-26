@@ -7,7 +7,7 @@
         <title>Generator Editor</title>
 
         <link rel="stylesheet" href="./editor.css" />
-        <script defer src="./editor.js"></script>
+        <script defer type="module" src="./editor.js"></script>
     </head>
     <body>
         <template id="cellTemplate">
@@ -28,14 +28,14 @@
 
         <header class="menu-header sticky border">
             <a class="back-icon" href="./">Back</a>
-            <h1>Generator Editor v0.4</h1>
+            <h1>Generator Editor v0.5</h1>
             <span class="audio-icon-wrapper"><span class="audio-icon"></span></span>
         </header>
 
         <div class="flex-row align-center justify-center w100p" style="padding: 40px; gap: 40px">
             <div class="flex-col" style="gap: 40px">
                 <div class="editor matrix form-inner form-outer">empty</div>
-                <div class="results matrix form-inner form-outer justify-center">empty</div>
+                <div class="results form-inner form-outer justify-center">empty</div>
             </div>
 
             <div class="form-inner form-outer settings">
@@ -63,13 +63,32 @@
 
                     <div class="flex-row" style="gap: 40px">
                         <button id="generateMatrixBtn">Generate matrix</button>
-                        <button id="generateSampleBtn">Generate sample</button>
                     </div>
 
                     <h1>Palette</h1>
                     <div class="flex-col">
                         <div class="palette border"></div>
                     </div>
+
+                    <h1>sample settings</h1>
+                    <div class="settings-row">
+                        <div class="flex-col">
+                            <div class="input-label">scale</div>
+                            <input type="number" id="sampleScale" min="1" max="50" value="20" />
+                        </div>
+                        <div class="flex-col">
+                            <div class="input-label">count</div>
+                            <input type="number" id="sampleCount" min="1" max="100" value="10" />
+                        </div>
+                        <div class="flex-col">
+                            <span class="input-label">transparent</span>
+                            <div class="flex-row justify-center">
+                                <input class="options-switcher" type="checkbox" id="sampleTransparent" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="generateSampleBtn">Generate sample</button>
                 </div>
             </div>
         </div>

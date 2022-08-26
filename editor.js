@@ -1,3 +1,5 @@
+import { copyCanvasToClipboard } from "./copyCanvasToClipboard.js";
+
 function toggleRatio() {
     editorHeightBlock.hidden = keepRatio.checked;
 }
@@ -135,9 +137,11 @@ function generatePic(indices) {
     const { cols, rows, size } = getColsRows();
 
     const canvas = canvasTemplate.content.cloneNode(true).firstElementChild;
+
+    canvas.addEventListener("click", copyCanvasToClipboard);
     const ctx = canvas.getContext("2d");
 
-    const scale = 30;
+    const scale = sampleScale.value;
 
     canvas.width = cols * scale;
     canvas.height = rows * scale;
@@ -154,7 +158,9 @@ function generatePic(indices) {
             if (!genColors.has(indices[index])) {
                 const rnd = Math.random();
 
-                const rndColor = rnd > 0.5 ? "white" : "black";
+                const noColor = sampleTransparent.checked ? "transparent" : "white";
+
+                const rndColor = rnd > 0.5 ? noColor : "black";
                 // const rndColor = `rgba(0,0,0,${rnd})`;
 
                 // todo(vmyshko): droch
@@ -182,9 +188,13 @@ function generateSample() {
         return +index;
     });
 
-    const sample = generatePic(indices);
+    const canvases = [];
+    for (let i = 0; i < sampleCount.value; i++) {
+        const canvas = generatePic(indices);
+        canvases.push(canvas);
+    }
 
-    resultsGrid.replaceChildren(sample);
+    resultsGrid.replaceChildren(...canvases);
 
     resultsGrid.style.setProperty("--cols", cols);
     resultsGrid.style.setProperty("--rows", rows);
