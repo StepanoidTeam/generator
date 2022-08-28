@@ -73,6 +73,15 @@ input[type="radio"]::before {
     margin-left: 4px;
 }
 
+
+.options-button.selected {
+    background: #fff;
+    border: 3px dotted black;
+    box-shadow: 0 0 0 3px #000,
+                4px 4px 0 3px #000;
+}
+
+
 .form-inner {
     background: #ccc;
     box-shadow:  inset 4px 4px white;

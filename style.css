@@ -10,9 +10,15 @@
     font-size: 24px; /* <- 1em equals to this value */
 }
 
+
+.normal{
+    font-size: 24px;
+}
+
 .big{
     font-size: 40px;
 }
+
 
 *, ::before, ::after {
     box-sizing: border-box;
@@ -95,10 +101,6 @@ hr {
 }
 
 canvas {
-    display: block;
-    float: left;
-    margin: 5px;
-
     image-rendering: pixelated;
 }
 
@@ -106,6 +108,16 @@ canvas:hover {
     cursor: pointer;
     box-shadow: 0 0 0 6px black;
 }
+
+#result-gallery{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+
+    padding-top: 10px;
+    background-color: #f2f2f2;
+} 
 
 .hide {
     display: none;
@@ -136,11 +148,4 @@ canvas:hover {
 .settings-row {
     display: inline-flex;
     gap: 20px;
-}
-
-.selected {
-    background: #fff;
-    border: 3px dotted black;
-    box-shadow: 0 0 0 3px #000,
-                4px 4px 0 3px #000;
 }
