@@ -160,7 +160,7 @@ function generatePic(indices) {
 
                 const noColor = sampleTransparent.checked ? "transparent" : "white";
 
-                const rndColor = rnd > 0.5 ? noColor : "black";
+                const rndColor = rnd < 0.5 ? noColor : "black";
                 // const rndColor = `rgba(0,0,0,${rnd})`;
 
                 // todo(vmyshko): droch
@@ -180,7 +180,7 @@ function generateSample() {
     const { cols, rows, size } = getColsRows();
 
     const editorGrid = document.querySelector(".editor");
-    const resultsGrid = document.querySelector(".results");
+    const resultsGrid = document.querySelector(".generator-results");
 
     const indices = [...editorGrid.children].map((refCell) => {
         const { index } = refCell.dataset;
@@ -214,6 +214,9 @@ generateSampleBtn.addEventListener("click", generateSample);
 //defaults
 editorWidth.value = 6;
 editorHeight.value = 6;
+
+sampleScale.value = 10;
+sampleCount.value = 12;
 
 //def
 

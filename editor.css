@@ -33,11 +33,6 @@
     background-color: #94a8e4;
 }
 
-.results.matrix {
-    grid-area: 2 / 2 / 3 / 3;
-
-    background-color: rosybrown;
-}
 
 .matrix {
     display: grid;
@@ -75,3 +70,9 @@
     width: 40px;
 }
 
+.generator-results{
+    padding: 10px;
+}
+.generator-results>canvas{
+    padding: 5px;
+}

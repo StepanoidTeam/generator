@@ -7,9 +7,10 @@
         <title>Generator Editor</title>
 
         <link rel="stylesheet" href="./editor.css" />
+        <link rel="icon" type="image/x-icon" href="./hash-img.png" />
         <script defer type="module" src="./editor.js"></script>
     </head>
-    <body>
+    <body class="flex-col h100vh">
         <template id="cellTemplate">
             <button class="cell flex-row align-center justify-center"></button>
         </template>
@@ -32,13 +33,13 @@
             <span class="audio-icon-wrapper"><span class="audio-icon"></span></span>
         </header>
 
-        <div class="flex-row align-center justify-center w100p" style="padding: 40px; gap: 40px">
-            <div class="flex-col" style="gap: 40px">
+        <div class="flex-row h100p">
+            <div class="flex-col" style="gap: 40px; padding: 40px">
                 <div class="editor matrix form-inner form-outer">empty</div>
-                <div class="results form-inner form-outer justify-center">empty</div>
+                <div class="generator-results form-inner form-outer justify-center">empty</div>
             </div>
 
-            <div class="form-inner form-outer settings">
+            <div class="form-inner border settings h100p">
                 <div class="settings-col">
                     <h1>Editor settings</h1>
                     <div class="settings-row">
@@ -65,20 +66,15 @@
                         <button id="generateMatrixBtn">Generate matrix</button>
                     </div>
 
-                    <h1>Palette</h1>
-                    <div class="flex-col">
-                        <div class="palette border"></div>
-                    </div>
-
                     <h1>sample settings</h1>
                     <div class="settings-row">
                         <div class="flex-col">
                             <div class="input-label">scale</div>
-                            <input type="number" id="sampleScale" min="1" max="50" value="20" />
+                            <input type="number" id="sampleScale" min="1" max="50" />
                         </div>
                         <div class="flex-col">
                             <div class="input-label">count</div>
-                            <input type="number" id="sampleCount" min="1" max="100" value="10" />
+                            <input type="number" id="sampleCount" min="1" max="100" />
                         </div>
                         <div class="flex-col">
                             <span class="input-label">transparent</span>
@@ -89,6 +85,11 @@
                     </div>
 
                     <button id="generateSampleBtn">Generate sample</button>
+
+                    <h1>Palette</h1>
+                    <div class="flex-col">
+                        <div class="palette border"></div>
+                    </div>
                 </div>
             </div>
         </div>
