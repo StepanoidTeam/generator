@@ -8,10 +8,7 @@ import { copyCanvasToClipboard } from "./copyCanvasToClipboard.js";
 
 // todo(vmyshko): use consts instead vars
 
-var body = document.querySelector("body");
 var generateBtn = document.querySelector(".generate-button");
-var startMenu = document.querySelector("#start-menu");
-var galleryMenu = document.querySelector(".menu-header.gallery");
 const resultGallery = document.querySelector("#result-gallery");
 var clearBG = document.querySelector("#clearBG");
 
@@ -268,7 +265,7 @@ function generate() {
 
             // todo(vmyshko): this func repeats twice, you can move it to global scope and just reuse
             function randomColor() {
-                x = randomNumber(0, 1);
+                let x = randomNumber(0, 1);
                 var color = "red";
                 if (x > 0.5) {
                     color = "black";
