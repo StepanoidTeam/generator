@@ -109,7 +109,7 @@ canvas:hover {
     box-shadow: 0 0 0 6px black;
 }
 
-#result-gallery{
+.generator-results{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
