@@ -1,0 +1,20 @@
+@import url('./style.css');
+
+
+body{
+
+    background-color: darkgray;
+}
+
+#area-editor{
+    background-color: bisque;
+    cursor: initial;
+    /* prevent scale */
+    align-self: center;
+}
+
+
+.toolbox{
+    gap: 10px;
+    padding: 10px;
+}
