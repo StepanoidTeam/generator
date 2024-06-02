@@ -50,33 +50,48 @@ class Rect {
     transformations = "";
 
     angle = 0;
+    xflip = false;
+    yflip = false;
     draw(ctx) {
-        //draw lines
+        //draw area
         ctx.beginPath();
 
-        ctx.rect(...upscaleCoords([...this.coords, ...sumVector(this.size, 1)]));
+        ctx.rect(...upscaleCoords([...this.coords, ...this.size]));
 
         ctx.fillStyle = this.selected ? "rgba(255,0,0,0.5)" : "rgba(0,255,0,0.5)";
         ctx.fill();
         ctx.stroke();
 
-        new Point(this.coords).draw(ctx);
-        new Point(sumVectors(this.coords, this.size)).draw(ctx);
+        // draw draggable points
+        new Point(this.coords).draw(ctx, "gold");
+        const bottomRightPointCoords = sumVector(sumVectors(this.coords, this.size), -1);
+        new Point(bottomRightPointCoords).draw(ctx, "cornflowerblue");
 
         const lineHeight = 40;
         ctx.font = `${lineHeight}px VT323`;
-        const center = sumVectors(this.coords, sumVectors(mulVector(this.size, 0.5), [0, 1]));
+
+        //1-0
+        //2-0.5?
+        //3-1
+        //4-1.5
+
+        const centerPt = sumVectors(this.coords, sumVector(mulVector(this.size, 0.5), -0.5));
+
+        new Point(centerPt).draw(ctx, "teal");
 
         ctx.save();
 
-        ctx.textAlign = "center";
+        const matrix = new DOMMatrix()
+            .translate(...upscaleCoords(sumVector(centerPt, 0.5)))
+            .rotate(this.angle)
+            .scale(this.xflip ? -1 : 1, this.yflip ? -1 : 1);
 
-        // this.angle++;
-        const matrix = new DOMMatrix().translate(...sumVectors(upscaleCoords(center), [0, -lineHeight / 4]), 0).rotate(this.angle);
         ctx.setTransform(matrix);
 
-        ctx.fillStyle = "white";
-        ctx.fillText("A", 0, lineHeight / 4);
+        ctx.textAlign = "center";
+        // letters to use: "FGJLQRZ"
+        ctx.fillStyle = "black";
+        ctx.fillText("🔠", 0, lineHeight / 4);
 
         ctx.restore();
     }
@@ -94,8 +109,8 @@ class Point {
         this.coords = [...coords];
     }
 
-    draw(ctx) {
-        ctx.fillStyle = "black";
+    draw(ctx, color) {
+        ctx.fillStyle = color || "black";
         ctx.fillRect(...upscaleCoords(this.coords), scale, scale);
     }
 }
@@ -132,9 +147,9 @@ function findRect(coords) {
     const rect = areas.find((rect) => {
         if (
             rect.coords[0] <= coords[0] &&
-            rect.coords[0] + rect.size[0] >= coords[0] &&
+            rect.coords[0] + rect.size[0] > coords[0] &&
             rect.coords[1] <= coords[1] &&
-            rect.coords[1] + rect.size[1] >= coords[1]
+            rect.coords[1] + rect.size[1] > coords[1]
         ) {
             return true;
         }
@@ -151,7 +166,6 @@ function findPointIndex(coords) {
 
 function deleteArea(coords) {
     const deleteRect = findRect(coords);
-
     if (!deleteRect) return; //not found
 
     areas.splice(areas.indexOf(deleteRect), 1);
@@ -159,7 +173,6 @@ function deleteArea(coords) {
 
 function copyArea(coords) {
     const rect = findRect(coords);
-
     if (!rect) return; //not found
 
     const rectCopy = rect.getCopy();
@@ -167,6 +180,27 @@ function copyArea(coords) {
     rectCopy.coords = sumVector(rectCopy.coords, 1);
 
     areas.push(rectCopy);
+}
+
+function rotateArea(coords) {
+    const rect = findRect(coords);
+    if (!rect) return; //not found
+
+    rect.angle += 90;
+}
+
+function vFlipArea(coords) {
+    const rect = findRect(coords);
+    if (!rect) return; //not found
+
+    rect.yflip = !rect.yflip;
+}
+
+function hFlipArea(coords) {
+    const rect = findRect(coords);
+    if (!rect) return; //not found
+
+    rect.xflip = !rect.xflip;
 }
 
 function getTool() {
@@ -183,7 +217,12 @@ function startScale(coords) {
 function moveScale(coords) {
     if (!scaleRect) return;
 
-    scaleRect.size.splice(0, 2, ...subVectors(coords, scaleRect.coords));
+    const newSize = sumVector(subVectors(coords, scaleRect.coords), 1)
+        // prevent zero-negative size
+
+        .map((coord) => Math.max(coord, 1));
+
+    scaleRect.size.splice(0, 2, ...newSize);
 }
 
 function endScale(coords) {
@@ -235,6 +274,18 @@ function onMouseDown(props) {
             break;
         case "copy":
             copyArea(props.coords);
+            break;
+
+        case "rotate":
+            rotateArea(props.coords);
+            break;
+
+        case "v-flip":
+            vFlipArea(props.coords);
+            break;
+
+        case "h-flip":
+            hFlipArea(props.coords);
             break;
     }
 }
