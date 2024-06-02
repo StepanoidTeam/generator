@@ -36,13 +36,21 @@
         <div class="flex-row h100p">
             <div class="flex-col" style="gap: 40px; padding: 40px">
                 <div class="palette-container form-inner form-outer">
-                    <h1>Palette</h1>
+                    <h1 class="flex">
+                        <div>Palette</div>
+
+                        <input class="options-switcher" type="checkbox" id="togglePalette" />
+                    </h1>
                     <div class="flex-col">
                         <div class="palette border"></div>
                     </div>
                 </div>
 
-                <div class="editor matrix form-inner form-outer">empty</div>
+                <div class="matrix-container form-inner form-outer">
+                    <h1>matrix</h1>
+                    <div id="$editorGrid" class="matrix">empty</div>
+                </div>
+
                 <div class="generator-results form-inner form-outer justify-center">empty</div>
             </div>
 
