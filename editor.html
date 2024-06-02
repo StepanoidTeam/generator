@@ -35,6 +35,13 @@
 
         <div class="flex-row h100p">
             <div class="flex-col" style="gap: 40px; padding: 40px">
+                <div class="palette-container form-inner form-outer">
+                    <h1>Palette</h1>
+                    <div class="flex-col">
+                        <div class="palette border"></div>
+                    </div>
+                </div>
+
                 <div class="editor matrix form-inner form-outer">empty</div>
                 <div class="generator-results form-inner form-outer justify-center">empty</div>
             </div>
@@ -79,17 +86,12 @@
                         <div class="flex-col">
                             <span class="input-label">transparent</span>
                             <div class="flex-row justify-center">
-                                <input class="options-switcher" type="checkbox" id="sampleTransparent" />
+                                <input class="options-switcher" type="checkbox" id="sampleTransparent" checked />
                             </div>
                         </div>
                     </div>
 
                     <button id="generateSampleBtn">Generate sample</button>
-
-                    <h1>Palette</h1>
-                    <div class="flex-col">
-                        <div class="palette border"></div>
-                    </div>
                 </div>
             </div>
         </div>
