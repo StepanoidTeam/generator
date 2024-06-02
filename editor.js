@@ -80,10 +80,29 @@ function hMirror({ x, y, cols, rows }) {
     return (y + 1) * cols - x - 1;
 }
 
+function md_Mirror({ x, y, cols, rows }) {
+    // main diag
+
+    if (x >= y) return y * cols + x;
+
+    return x * cols + y;
+}
+
+function sd_Mirror({ x, y, cols, rows }) {
+    // secondary diag
+
+    if (x + y < cols) return y * cols + x;
+
+    return (rows - 1 - x) * rows + (cols - 1 - y);
+}
+
 const presets = [
     //
     hMirror,
     vMirror,
+
+    md_Mirror,
+    sd_Mirror,
 
     notSet,
     noize,
