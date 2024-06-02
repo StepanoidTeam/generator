@@ -144,7 +144,7 @@ function endMovePoint() {
 }
 
 function findRect(coords) {
-    const rect = areas.find((rect) => {
+    const rect = areas.findLast((rect) => {
         if (
             rect.coords[0] <= coords[0] &&
             rect.coords[0] + rect.size[0] > coords[0] &&
