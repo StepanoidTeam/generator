@@ -1,12 +1,14 @@
-const canvas = document.getElementById("area-editor");
+import { seededRandom } from "./seeded-random.js";
 
 const scale = 20;
 const [cols, rows] = [20, 20];
 const [width, height] = upscaleCoords([cols, rows]);
 
-canvas.width = width;
+$areaEditorCanvas.width = width;
+$areaEditorCanvas.height = height;
 
-canvas.height = height;
+$sampleCanvas.width = width;
+$sampleCanvas.height = height;
 
 function upscaleCoords(coords) {
     return mulVector(coords, scale);
@@ -31,6 +33,14 @@ function subVectors(vector1, vector2) {
 class Rect {
     coords = [];
 
+    get x() {
+        return this.coords[0];
+    }
+
+    get y() {
+        return this.coords[1];
+    }
+
     size = [3, 3];
 
     get width() {
@@ -47,42 +57,48 @@ class Rect {
         this.coords = coords;
     }
 
-    transformations = "";
-
     angle = 0;
     xflip = false;
     yflip = false;
+
+    getCenter() {
+        return sumVectors(this.coords, mulVector(this.size, 0.5));
+    }
+
     draw(ctx) {
         //draw area
         ctx.beginPath();
 
         ctx.rect(...upscaleCoords([...this.coords, ...this.size]));
 
-        ctx.fillStyle = this.selected ? "rgba(255,0,0,0.5)" : "rgba(0,255,0,0.5)";
+        ctx.fillStyle = this.selected
+            ? "rgba(76,175,80,0.7)"
+            : "rgba(76,175,80,0.4)";
         ctx.fill();
-        ctx.stroke();
 
         // draw draggable points
         new Point(this.coords).draw(ctx, "gold");
-        const bottomRightPointCoords = sumVector(sumVectors(this.coords, this.size), -1);
+        const bottomRightPointCoords = sumVector(
+            sumVectors(this.coords, this.size),
+            -1
+        );
         new Point(bottomRightPointCoords).draw(ctx, "cornflowerblue");
+
+        ctx.stroke();
+
+        // text
 
         const lineHeight = 40;
         ctx.font = `${lineHeight}px VT323`;
 
-        //1-0
-        //2-0.5?
-        //3-1
-        //4-1.5
+        const centerPt = this.getCenter();
 
-        const centerPt = sumVectors(this.coords, sumVector(mulVector(this.size, 0.5), -0.5));
-
-        new Point(centerPt).draw(ctx, "teal");
+        new Point(sumVector(centerPt, -0.5)).draw(ctx, "teal");
 
         ctx.save();
 
         const matrix = new DOMMatrix()
-            .translate(...upscaleCoords(sumVector(centerPt, 0.5)))
+            .translate(...upscaleCoords(centerPt))
             .rotate(this.angle)
             .scale(this.xflip ? -1 : 1, this.yflip ? -1 : 1);
 
@@ -144,24 +160,19 @@ function endMovePoint() {
 }
 
 function findRect(coords) {
+    const [x, y] = coords;
     const rect = areas.findLast((rect) => {
         if (
-            rect.coords[0] <= coords[0] &&
-            rect.coords[0] + rect.size[0] > coords[0] &&
-            rect.coords[1] <= coords[1] &&
-            rect.coords[1] + rect.size[1] > coords[1]
+            rect.x <= x &&
+            rect.x + rect.width > x &&
+            rect.y <= y &&
+            rect.y + rect.height > y
         ) {
             return true;
         }
     });
 
     return rect;
-}
-
-function findPointIndex(coords) {
-    const pointIndex = areas.findIndex((point) => `${point.coords}` === `${coords}`);
-
-    return pointIndex;
 }
 
 function deleteArea(coords) {
@@ -236,7 +247,7 @@ function handleCursorPointer(props) {
         if (hoveredRect) hoveredRect.selected = false;
 
         hoveredRect = null;
-        canvas.style.cursor = "initial";
+        $areaEditorCanvas.style.cursor = "initial";
     } else {
         if (hoveredRect) hoveredRect.selected = false;
         hoveredRect = rect;
@@ -253,7 +264,7 @@ function handleCursorPointer(props) {
                 "h-flip": "col-resize",
             }[props.tool] || "pointer";
 
-        canvas.style.cursor = toolCursor;
+        $areaEditorCanvas.style.cursor = toolCursor;
     }
 }
 
@@ -312,10 +323,49 @@ function onMouseUp(props) {
             endScale(props.coords);
             break;
     }
+
+    updateResult();
+}
+
+function pickRandom(array, random) {
+    const randomIndex = Math.floor(random() * array.length);
+    return array[randomIndex];
+}
+
+function updateResult() {
+    const ctx = $sampleCanvas.getContext("2d");
+
+    ctx.clearRect(0, 0, width, height);
+
+    const seed = Math.random();
+    areas.forEach(drawAreaSample);
+
+    function drawAreaSample(area) {
+        const random = seededRandom(seed);
+
+        for (let col = 0; col < area.width; col++) {
+            for (let row = 0; row < area.height; row++) {
+                const pointCoords = sumVectors(area.coords, [col, row]);
+
+                new Point(pointCoords).draw(
+                    ctx,
+                    pickRandom(["darkgray", "dimgray"], random)
+                );
+            }
+        }
+
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(
+            ...upscaleCoords(area.coords),
+            ...upscaleCoords(area.size)
+        );
+    }
 }
 
 function downscaleCoords(event) {
-    const [x, y] = [event.offsetX, event.offsetY].map((coord) => Math.floor(coord / scale));
+    const [x, y] = [event.offsetX, event.offsetY].map((coord) =>
+        Math.floor(coord / scale)
+    );
     return [x, y];
 }
 
@@ -329,15 +379,34 @@ function prepProps(callback) {
     };
 }
 
-canvas.addEventListener("mousedown", prepProps(onMouseDown));
-canvas.addEventListener("mousemove", prepProps(onMouseMove));
-canvas.addEventListener("mouseup", prepProps(onMouseUp));
+$areaEditorCanvas.addEventListener("mousedown", prepProps(onMouseDown));
+$areaEditorCanvas.addEventListener("mousemove", prepProps(onMouseMove));
+$areaEditorCanvas.addEventListener("mouseup", prepProps(onMouseUp));
 
-const ctx = canvas.getContext("2d");
+function getPairs(arr) {
+    const pairs = [];
+    for (let i = 0; i < arr.length - 1; i++) {
+        pairs.push([arr[i], arr[i + 1]]);
+    }
+    return pairs;
+}
+
+const ctx = $areaEditorCanvas.getContext("2d");
 function draw() {
     ctx.clearRect(0, 0, width, height);
 
-    areas.forEach((p) => p.draw(ctx));
+    ctx.strokeStyle = "gray";
+    ctx.lineWidth = 3;
+    getPairs(areas).forEach(([area1, area2]) => {
+        ctx.beginPath();
+        ctx.moveTo(...upscaleCoords(area1.getCenter()));
+        ctx.lineTo(...upscaleCoords(area2.getCenter()));
+        ctx.stroke();
+    });
+
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 1;
+    areas.forEach((area) => area.draw(ctx));
 
     requestAnimationFrame(draw);
 }

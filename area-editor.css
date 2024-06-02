@@ -1,20 +1,21 @@
-@import url('./style.css');
+@import url("./style.css");
 
-
-body{
-
+body {
     background-color: darkgray;
 }
 
-#area-editor{
+canvas {
     background-color: bisque;
     cursor: initial;
     /* prevent scale */
     align-self: center;
 }
 
-
-.toolbox{
+.toolbox {
     gap: 10px;
     padding: 10px;
+}
+
+.area-editor-canvas-container {
+    gap: 20px;
 }

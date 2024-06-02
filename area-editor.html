@@ -10,7 +10,10 @@
     </head>
     <body class="h100vh flex-col align-center justify-center">
         <div class="flex-row">
-            <canvas id="area-editor"> </canvas>
+            <div class="flex-col area-editor-canvas-container">
+                <canvas id="$areaEditorCanvas"> </canvas>
+                <canvas id="$sampleCanvas"> </canvas>
+            </div>
             <div class="flex-col toolbox">
                 <input type="radio" name="tool" data-label="add" value="add" />
                 <input type="radio" name="tool" data-label="move" value="move" />
