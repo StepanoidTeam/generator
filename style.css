@@ -10,6 +10,10 @@
     font-size: 24px; /* <- 1em equals to this value */
 }
 
+body {
+    background-color: #6e6e6e;
+}
+
 .normal {
     font-size: 24px;
 }
