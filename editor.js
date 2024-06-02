@@ -132,8 +132,6 @@ function generateMatrix() {
 
     const currentPresetFn = presets.find((p) => p.name === selectedPresetName);
 
-    const editorGrid = document.querySelector(".editor");
-
     const newCells = [];
     for (let index = 0; index < size; index++) {
         const cell = cellTemplate.content.cloneNode(true).firstElementChild;
@@ -146,10 +144,10 @@ function generateMatrix() {
         cell.addEventListener("click", paintCell);
         newCells.push(cell);
     }
-    editorGrid.replaceChildren(...newCells);
+    $editorGrid.replaceChildren(...newCells);
 
-    editorGrid.style.setProperty("--cols", cols);
-    editorGrid.style.setProperty("--rows", rows);
+    $editorGrid.style.setProperty("--cols", cols);
+    $editorGrid.style.setProperty("--rows", rows);
 }
 
 function generatePic(indices) {
@@ -198,10 +196,9 @@ function generatePic(indices) {
 function generateSample() {
     const { cols, rows, size } = getColsRows();
 
-    const editorGrid = document.querySelector(".editor");
     const resultsGrid = document.querySelector(".generator-results");
 
-    const indices = [...editorGrid.children].map((refCell) => {
+    const indices = [...$editorGrid.children].map((refCell) => {
         const { index } = refCell.dataset;
 
         return +index;

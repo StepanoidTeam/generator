@@ -12,6 +12,14 @@ https://stepanoidteam.github.io/identicon-generator/editor
 
 ## todo
 
+### editor
+
+[ ] collapsibles for palette and cell matrix  
+[ ] fix right panel height  
+[ ] put each setting near panel where it used?  
+[ ] simplify algo?
+[ ] make area-based algo R Б split/rotate/mirror...
+
 from this one:
 https://hairic.itch.io/random-spr
 make colors 1-n

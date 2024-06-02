@@ -31,12 +31,6 @@
     grid-row-gap: 40px;
 }
 
-.editor.matrix {
-    grid-area: 1 / 2 / 2 / 3;
-
-    background-color: #94a8e4;
-}
-
 .matrix {
     display: grid;
 
