@@ -84,6 +84,7 @@ class Rect {
 
         // draw draggable points
         new Point(this.coords).draw(ctx, "gold");
+
         const bottomRightPointCoords = sumVector(
             sumVectors(this.coords, this.size),
             -1
@@ -374,7 +375,7 @@ function updateResult(seed = updateSeed) {
         });
 
         // rotate n times
-        for (let rotation = 0; rotation < area.angle / 90; rotation++) {
+        for (let rotation = 0; rotation < (area.angle / 90) % 4; rotation++) {
             console.log("rot", rotation);
             matrix = rotateMatrix90Clockwise(matrix);
         }
@@ -439,7 +440,13 @@ function updateResult(seed = updateSeed) {
     }
 }
 
+function clearAreas() {
+    areas.splice(0);
+    updateResult();
+}
+
 $btnGenerate.addEventListener("click", () => updateResult(Math.random()));
+$btnClear.addEventListener("click", clearAreas);
 
 function downscaleCoords(event) {
     const [x, y] = [event.offsetX, event.offsetY].map((coord) =>
