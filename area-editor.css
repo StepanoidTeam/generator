@@ -5,7 +5,7 @@ body {
 }
 
 canvas {
-    background-color: bisque;
+    background-color: lightgray;
     cursor: initial;
     /* prevent scale */
     align-self: center;

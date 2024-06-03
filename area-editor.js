@@ -1,5 +1,11 @@
 import { seededRandom } from "./seeded-random.js";
 
+import {
+    flipMatrixHorizontally,
+    flipMatrixVertically,
+    rotateMatrix90Clockwise,
+} from "./matrix.js";
+
 const scale = 20;
 const [cols, rows] = [20, 20];
 const [width, height] = upscaleCoords([cols, rows]);
@@ -327,30 +333,101 @@ function onMouseUp(props) {
     updateResult();
 }
 
-function pickRandom(array, random) {
-    const randomIndex = Math.floor(random() * array.length);
+function pickRandom({ array, random, seed }) {
+    const rnd = random(seed);
+
+    const randomIndex = Math.floor(rnd * array.length);
     return array[randomIndex];
 }
 
-function updateResult() {
+function generateMatrix0n({ cols, rows }) {
+    return Array.from({ length: cols }, (_, col) =>
+        Array.from({ length: rows }, (_, row) => col * rows + row)
+    );
+}
+
+function generateMatrixRnd({ cols, rows, seed }) {
+    const random = seededRandom(seed);
+
+    return Array.from({ length: cols }, (_, col) =>
+        Array.from({ length: rows }, (_, row) => random())
+    );
+}
+
+let updateSeed = Math.random();
+function updateResult(seed = updateSeed) {
+    updateSeed = seed;
     const ctx = $sampleCanvas.getContext("2d");
 
     ctx.clearRect(0, 0, width, height);
 
-    const seed = Math.random();
+    const globalGenerationSeed = seed;
+
     areas.forEach(drawAreaSample);
 
     function drawAreaSample(area) {
-        const random = seededRandom(seed);
+        // make matrix and fill with seeds/indexes
+        let matrix = generateMatrixRnd({
+            cols: area.height,
+            rows: area.width,
+            seed: globalGenerationSeed,
+        });
+
+        // rotate n times
+        for (let rotation = 0; rotation < area.angle / 90; rotation++) {
+            console.log("rot", rotation);
+            matrix = rotateMatrix90Clockwise(matrix);
+        }
+
+        // todo(vmyshko): flip flop
+        if (area.xflip) {
+            console.log("flipped X");
+            matrix = flipMatrixHorizontally(matrix);
+        }
+        if (area.yflip) {
+            console.log("flipped Y");
+            matrix = flipMatrixVertically(matrix);
+        }
+
+        // todo(vmyshko): draw it
+        // const random = seededRandom(seed);
 
         for (let col = 0; col < area.width; col++) {
             for (let row = 0; row < area.height; row++) {
                 const pointCoords = sumVectors(area.coords, [col, row]);
 
+                const matrixCellSeed = matrix[row][col];
+
+                // todo(vmyshko): prevent shit random
+                const cellRandom = seededRandom(
+                    globalGenerationSeed * 100 + matrixCellSeed * 1000
+                );
+
+                // todo(vmyshko): to fix first pseudo random
+
                 new Point(pointCoords).draw(
                     ctx,
-                    pickRandom(["darkgray", "dimgray"], random)
+                    pickRandom({
+                        array: ["transparent", "dimgray"],
+                        random: cellRandom,
+                        seed: matrixCellSeed,
+                    })
+
+                    // [("darkgray", "dimgray")][matrixCellSeed % 2]
                 );
+                // debug
+                // const lineHeight = 20;
+                // ctx.font = `${lineHeight}px VT323`;
+
+                // ctx.textAlign = "center";
+                // ctx.fillStyle = "lime";
+                // ctx.fillText(
+                //     matrixCellSeed,
+                //     ...sumVectors(upscaleCoords(pointCoords), [
+                //         lineHeight / 2,
+                //         (lineHeight * 3) / 4,
+                //     ])
+                // );
             }
         }
 
@@ -361,6 +438,8 @@ function updateResult() {
         );
     }
 }
+
+$btnGenerate.addEventListener("click", () => updateResult(Math.random()));
 
 function downscaleCoords(event) {
     const [x, y] = [event.offsetX, event.offsetY].map((coord) =>
