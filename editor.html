@@ -5,7 +5,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Generator Editor</title>
-
         <link rel="stylesheet" href="./editor.css" />
         <link rel="icon" type="image/x-icon" href="./hash-img.png" />
         <script defer type="module" src="./editor.js"></script>
@@ -16,11 +15,19 @@
         </template>
 
         <template id="paletteTemplate">
-            <input type="radio" name="palette" class="palette-cell flex-row align-center justify-center" />
+            <input
+                type="radio"
+                name="palette"
+                class="palette-cell flex-row align-center justify-center"
+            />
         </template>
 
         <template id="presetTemplate">
-            <input type="radio" name="preset" class="flex-row align-center justify-center" />
+            <input
+                type="radio"
+                name="preset"
+                class="flex-row align-center justify-center"
+            />
         </template>
 
         <template id="canvasTemplate">
@@ -30,7 +37,9 @@
         <header class="menu-header sticky border">
             <a class="back-icon" href="./">Back</a>
             <h1>Generator Editor v0.5</h1>
-            <span class="audio-icon-wrapper"><span class="audio-icon"></span></span>
+            <span class="audio-icon-wrapper"
+                ><span class="audio-icon"></span
+            ></span>
         </header>
 
         <div class="flex-row h100p">
@@ -39,7 +48,11 @@
                     <h1 class="flex">
                         <div>Palette</div>
 
-                        <input class="options-switcher" type="checkbox" id="togglePalette" />
+                        <input
+                            class="options-switcher"
+                            type="checkbox"
+                            id="togglePalette"
+                        />
                     </h1>
                     <div class="flex-col">
                         <div class="palette border"></div>
@@ -51,7 +64,11 @@
                     <div id="$editorGrid" class="matrix">empty</div>
                 </div>
 
-                <div class="generator-results form-inner form-outer justify-center">empty</div>
+                <div
+                    class="generator-results form-inner form-outer justify-center"
+                >
+                    empty
+                </div>
             </div>
 
             <div class="form-inner border settings h100p">
@@ -60,16 +77,30 @@
                     <div class="settings-row">
                         <div class="flex-col w100p">
                             <div class="input-label">Width</div>
-                            <input type="number" id="editorWidth" min="2" max="20" />
+                            <input
+                                type="number"
+                                id="editorWidth"
+                                min="2"
+                                max="20"
+                            />
                         </div>
                         <div class="flex-col w100p" id="editorHeightBlock">
                             <div class="input-label">Height</div>
-                            <input type="number" id="editorHeight" min="2" max="20" />
+                            <input
+                                type="number"
+                                id="editorHeight"
+                                min="2"
+                                max="20"
+                            />
                         </div>
                         <div class="flex-col">
                             <span class="input-label">keep ratio</span>
                             <div class="flex-row justify-center">
-                                <input class="options-switcher" type="checkbox" id="keepRatio" />
+                                <input
+                                    class="options-switcher"
+                                    type="checkbox"
+                                    id="keepRatio"
+                                />
                             </div>
                         </div>
                     </div>
@@ -85,16 +116,31 @@
                     <div class="settings-row">
                         <div class="flex-col">
                             <div class="input-label">scale</div>
-                            <input type="number" id="sampleScale" min="1" max="50" />
+                            <input
+                                type="number"
+                                id="sampleScale"
+                                min="1"
+                                max="50"
+                            />
                         </div>
                         <div class="flex-col">
                             <div class="input-label">count</div>
-                            <input type="number" id="sampleCount" min="1" max="100" />
+                            <input
+                                type="number"
+                                id="sampleCount"
+                                min="1"
+                                max="100"
+                            />
                         </div>
                         <div class="flex-col">
                             <span class="input-label">transparent</span>
                             <div class="flex-row justify-center">
-                                <input class="options-switcher" type="checkbox" id="sampleTransparent" checked />
+                                <input
+                                    class="options-switcher"
+                                    type="checkbox"
+                                    id="sampleTransparent"
+                                    checked
+                                />
                             </div>
                         </div>
                     </div>
