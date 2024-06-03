@@ -40,12 +40,21 @@ button {
     background-color: #efefef;
 }
 
-button:hover {
+button:hover:not([disabled]) {
     background-color: white;
 }
 
-button:active {
-    background-color: #efefef;
+button:active:not([disabled]) {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0 0 #000;
+    background-color: #d9d9d9;
+}
+
+button[disabled] {
+    color: gray;
+    border: 3px solid gray;
+    box-shadow: none;
+    /* box-shadow: 4px 4px 0 0 gray; */
 }
 
 input[type="radio"] {

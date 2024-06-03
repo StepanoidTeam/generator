@@ -24,10 +24,9 @@
     box-sizing: border-box;
 }
 
-.options-switcher:disabled::before{
+.options-switcher:disabled::before {
     background-color: #989898;
 }
-
 
 /* handler */
 .options-switcher:after {
@@ -52,10 +51,16 @@
 
 .options-switcher:checked:after {
     content: "on";
-    background-color: white;
     left: calc(100% - var(--handler-width));
 }
 
 .options-switcher:hover:after {
     background-color: white;
+}
+
+.options-switcher:active:after {
+    transform: translate(2px, 2px);
+    background-color: #d9d9d9;
+
+    box-shadow: 0 0 0 3px #000, 0px 0px 0 3px #000;
 }
