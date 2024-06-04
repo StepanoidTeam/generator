@@ -10,6 +10,14 @@
         <script defer type="module" src="./editor.js"></script>
     </head>
     <body class="flex-col h100vh">
+        <header class="menu-header sticky border">
+            <a class="back-icon" href="./">Back</a>
+            <h1>Generator Editor v0.5</h1>
+            <span class="audio-icon-wrapper"
+                ><span class="audio-icon"></span
+            ></span>
+        </header>
+
         <template id="cellTemplate">
             <button class="cell flex-row align-center justify-center"></button>
         </template>
@@ -33,14 +41,6 @@
         <template id="canvasTemplate">
             <canvas class="sample"></canvas>
         </template>
-
-        <header class="menu-header sticky border">
-            <a class="back-icon" href="./">Back</a>
-            <h1>Generator Editor v0.5</h1>
-            <span class="audio-icon-wrapper"
-                ><span class="audio-icon"></span
-            ></span>
-        </header>
 
         <div class="flex-row h100p">
             <div class="flex-col" style="gap: 40px; padding: 40px; flex: 1">
