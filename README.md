@@ -43,4 +43,5 @@ generate trees? full random bush, symmetric leg
 
 ## useful links
 
-https://aikoncwd.itch.io/sprite-generator
+https://aikoncwd.itch.io/sprite-generator  
+https://hairic.itch.io/random-spr
