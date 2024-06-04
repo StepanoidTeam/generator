@@ -40,3 +40,7 @@ impl solid/body/empty brushes to ensure some parts will be empty/solid/random
 addone brush -- always solid but random color/shade
 
 generate trees? full random bush, symmetric leg
+
+## useful links
+
+https://aikoncwd.itch.io/sprite-generator
