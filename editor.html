@@ -43,25 +43,34 @@
         </header>
 
         <div class="flex-row h100p">
-            <div class="flex-col" style="gap: 40px; padding: 40px">
-                <div class="palette-container form-inner form-outer">
-                    <h1 class="flex">
-                        <div>Palette</div>
+            <div class="flex-col" style="gap: 40px; padding: 40px; flex: 1">
+                <div class="palette-container form-inner form-outer p10">
+                    <h1 class="flex-row align-center p10">
+                        <div style="flex: 1">Palette</div>
 
                         <input
+                            id="$togglePaletteContainer"
                             class="options-switcher"
                             type="checkbox"
-                            id="togglePalette"
                         />
                     </h1>
-                    <div class="flex-col">
-                        <div class="palette border"></div>
+                    <div id="$paletteContainer" class="flex-col p10" hidden>
+                        <div class="palette"></div>
                     </div>
                 </div>
 
-                <div class="matrix-container form-inner form-outer">
-                    <h1>matrix</h1>
-                    <div id="$editorGrid" class="matrix">empty</div>
+                <div class="matrix-container form-inner form-outer p10">
+                    <h1 class="flex-row align-center p10">
+                        <div style="flex: 1">matrix</div>
+                        <input
+                            id="$toggleMatrixContainer"
+                            class="options-switcher"
+                            type="checkbox"
+                        />
+                    </h1>
+                    <div id="$matrixContainer" class="p10" hidden>
+                        <div id="$editorGrid" class="matrix">empty</div>
+                    </div>
                 </div>
 
                 <div
@@ -109,7 +118,7 @@
                     <div class="presets flex-row" style="gap: 4px"></div>
 
                     <div class="flex-row" style="gap: 40px">
-                        <button id="generateMatrixBtn">Generate matrix</button>
+                        <button id="$generateMatrixBtn">Generate matrix</button>
                     </div>
 
                     <h1>sample settings</h1>
@@ -145,7 +154,7 @@
                         </div>
                     </div>
 
-                    <button id="generateSampleBtn">Generate sample</button>
+                    <button id="$generateSampleBtn">Generate sample [R]</button>
                 </div>
             </div>
         </div>

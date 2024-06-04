@@ -96,6 +96,33 @@ function sd_Mirror({ x, y, cols, rows }) {
     return (rows - 1 - x) * rows + (cols - 1 - y);
 }
 
+function star({ x, y, cols, rows }) {
+    // todo(vmyshko): high complexity, better to work on diagonal areas in area-editor
+    return 0;
+}
+
+function helix({ x, y, cols, rows }) {
+    // todo(vmyshko): too complicated to code, better to work on area-editor
+    const isTopPart = y < rows / 2;
+    const isLeftPart = x < cols / 2;
+
+    if (isLeftPart && isTopPart) return y * cols + x;
+
+    if (!isLeftPart && isTopPart) return y * cols + Math.round(x - rows / 2);
+
+    if (!isLeftPart && !isTopPart) return 180;
+
+    if (isLeftPart && !isTopPart) return 270;
+
+    // if (y < rows / 2) return y * cols + x; // first half
+
+    // return (rows - y - 1) * cols + x;
+
+    // if (x < cols / 2) return y * cols + x; // first half
+
+    // return (y + 1) * cols - x - 1;
+}
+
 const presets = [
     //
     hMirror,
@@ -104,13 +131,17 @@ const presets = [
     md_Mirror,
     sd_Mirror,
 
+    // star,
+    // helix,
+
     notSet,
     noize,
 ];
 
 function initPresets() {
     const presetEls = presets.map((preset) => {
-        const presetEl = presetTemplate.content.cloneNode(true).firstElementChild;
+        const presetEl =
+            presetTemplate.content.cloneNode(true).firstElementChild;
 
         presetEl.dataset.label = preset.name;
         presetEl.value = preset.name;
@@ -128,7 +159,9 @@ function initPresets() {
 function generateMatrix() {
     const { cols, rows, size } = getColsRows();
 
-    const selectedPresetName = document.querySelector("[name=preset]:checked").value;
+    const selectedPresetName = document.querySelector(
+        "[name=preset]:checked"
+    ).value;
 
     const currentPresetFn = presets.find((p) => p.name === selectedPresetName);
 
@@ -175,7 +208,9 @@ function generatePic(indices) {
             if (!genColors.has(indices[index])) {
                 const rnd = Math.random();
 
-                const noColor = sampleTransparent.checked ? "transparent" : "white";
+                const noColor = sampleTransparent.checked
+                    ? "transparent"
+                    : "white";
 
                 const rndColor = rnd < 0.5 ? noColor : "black";
                 // const rndColor = `rgba(0,0,0,${rnd})`;
@@ -220,23 +255,37 @@ initPresets();
 
 // add listeners
 keepRatio.addEventListener("change", toggleRatio);
-generateMatrixBtn.addEventListener("click", () => {
+$generateMatrixBtn.addEventListener("click", () => {
     generateMatrix();
     generatePalette();
 });
-// generateSampleBtn.addEventListener("click", generateSample);
-generateSampleBtn.addEventListener("click", generateSample);
+
+$generateSampleBtn.addEventListener("click", generateSample);
+
+$togglePaletteContainer.addEventListener("click", () => {
+    $paletteContainer.hidden = !$paletteContainer.hidden;
+});
+
+$toggleMatrixContainer.addEventListener("click", () => {
+    $matrixContainer.hidden = !$matrixContainer.hidden;
+});
 
 //defaults
-editorWidth.value = 6;
-editorHeight.value = 6;
+editorWidth.value = 9;
+editorHeight.value = 9;
 
-sampleScale.value = 10;
-sampleCount.value = 12;
+sampleScale.value = 5;
+sampleCount.value = 68;
 
 //def
 
-generateMatrixBtn.click();
-generateSampleBtn.click();
+$generateMatrixBtn.click();
+$generateSampleBtn.click();
 
 keepRatio.click();
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "r") {
+        $generateSampleBtn.click();
+    }
+});
