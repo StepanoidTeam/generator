@@ -20,18 +20,22 @@
     justify-content: center;
 }
 
+.p10 {
+    padding: 10px;
+}
+
 .w100p {
     width: 100%;
 }
 
-.h100p{
+.h100p {
     height: 100%;
 }
 
-.h100vh{
+.h100vh {
     height: 100vh;
 }
 
-[hidden]{
+[hidden] {
     display: none;
 }

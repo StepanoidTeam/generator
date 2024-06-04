@@ -8,60 +8,78 @@
         <link rel="stylesheet" href="./area-editor.css" />
         <script defer type="module" src="./area-editor.js"></script>
     </head>
-    <body class="h100vh flex-col align-center justify-center">
-        <div class="flex-row">
-            <div class="flex-col area-editor-canvas-container">
-                <canvas id="$areaEditorCanvas"> </canvas>
-                <canvas id="$sampleCanvas"> </canvas>
-            </div>
-            <div class="flex-col toolbox">
-                <input type="radio" name="tool" data-label="add" value="add" />
-                <input
-                    type="radio"
-                    name="tool"
-                    data-label="move"
-                    value="move"
-                />
-                <input
-                    type="radio"
-                    name="tool"
-                    data-label="resize"
-                    value="scale"
-                />
-                <input
-                    type="radio"
-                    name="tool"
-                    data-label="copy"
-                    value="copy"
-                />
-                <input
-                    type="radio"
-                    name="tool"
-                    data-label="delete"
-                    value="delete"
-                />
-                <input
-                    type="radio"
-                    name="tool"
-                    data-label="rotate"
-                    value="rotate"
-                />
-                <input
-                    type="radio"
-                    name="tool"
-                    data-label="v-flip"
-                    value="v-flip"
-                />
-                <input
-                    type="radio"
-                    name="tool"
-                    data-label="h-flip"
-                    value="h-flip"
-                />
+    <body>
+        <header class="menu-header sticky border">
+            <a class="back-icon" href="./">Back</a>
+            <h1>Area Editor v0.2</h1>
+            <span class="audio-icon-wrapper"
+                ><span class="audio-icon"></span
+            ></span>
+        </header>
 
-                <button id="$btnGenerate">generate</button>
-                <button id="$btnClear">clear all</button>
+        <section
+            class="flex-col align-center justify-center"
+            style="padding-top: 40px"
+        >
+            <div class="flex-row">
+                <div class="flex-col area-editor-canvas-container">
+                    <canvas id="$areaEditorCanvas"> </canvas>
+                    <canvas id="$sampleCanvas"> </canvas>
+                </div>
+                <div class="flex-col toolbox">
+                    <input
+                        type="radio"
+                        name="tool"
+                        data-label="add"
+                        value="add"
+                    />
+                    <input
+                        type="radio"
+                        name="tool"
+                        data-label="move"
+                        value="move"
+                    />
+                    <input
+                        type="radio"
+                        name="tool"
+                        data-label="resize"
+                        value="scale"
+                    />
+                    <input
+                        type="radio"
+                        name="tool"
+                        data-label="copy"
+                        value="copy"
+                    />
+                    <input
+                        type="radio"
+                        name="tool"
+                        data-label="delete"
+                        value="delete"
+                    />
+                    <input
+                        type="radio"
+                        name="tool"
+                        data-label="rotate"
+                        value="rotate"
+                    />
+                    <input
+                        type="radio"
+                        name="tool"
+                        data-label="v-flip"
+                        value="v-flip"
+                    />
+                    <input
+                        type="radio"
+                        name="tool"
+                        data-label="h-flip"
+                        value="h-flip"
+                    />
+
+                    <button id="$btnGenerate">generate</button>
+                    <button id="$btnClear">clear all</button>
+                </div>
             </div>
-        </div>
+        </section>
     </body>
 </html>
